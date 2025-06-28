@@ -1,6 +1,6 @@
 {
   "name": "afp-recharge-api-sdk",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "AFP Recharge API SDK for 3rd party companies",
   "main": "index.js",
   "scripts": {
