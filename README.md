@@ -30,7 +30,40 @@ MY_IP_ADDRESS=your_whitelisted_ip
 ## 📦 Installation
 
 ```bash
-npm install afp-recharge-sdk
-# AFP_Recharge_API_SDK
-# AFP_Recharge_API_SDK
-# AFP_Recharge_API_SDK
+npm install afp-recharge-api-sdk
+
+
+#  to call rechage service :
+
+   const rechargeFunction = require("./index.js");
+   (async () => {
+   try {
+      console.log("ENV Rechage:", process.env.API_KEY, process.env.BASE_URL, process.env.MY_IP_ADDRESS);
+
+      const result = await rechargeFunction.recharge("0730720001", 10);
+      console.log("Recharge response:", result);
+   } catch (err) {
+      console.error("Error:", err.message);
+   }
+   })(); 
+
+
+   
+#  to call check balance service
+      // const RechargeSDK = require("afp-recharge-api-sdk");
+      const rechargeFunction = require("./index.js");
+
+      (async () => {
+      try {
+         console.log("ENV Balance:", process.env.API_KEY, process.env.BASE_URL, process.env.MY_IP_ADDRESS);
+
+         const balance = await rechargeFunction.checkBalance();
+         console.log("Balance:", balance);
+      } catch (err) {
+         console.error("Error:", err.message);
+      }
+      })();
+
+
+ 
+
