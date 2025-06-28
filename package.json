@@ -1,0 +1,16 @@
+{
+  "name": "afp-recharge-api-sdk",
+  "version": "1.0.0",
+  "description": "AFP Recharge API SDK for 3rd party companies",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test_recharge.js  && node test_balance.js"
+  },
+  "keywords": [],
+  "author": "Afghan-pay Top Up Company [Fayaz Nasrati]",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "dotenv": "^16.5.0"
+  }
+}
