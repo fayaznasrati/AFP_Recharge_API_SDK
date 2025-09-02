@@ -24,7 +24,7 @@ Create a `.env` file in your project root with the following variables:
 ```env
 API_KEY=your_api_key_here
 SECRET_KEY=your_secret_key_here
-BASE_URL=http://172.28.28.103         # AfghanPay Internal API IP
+AFP_BASE_URL=http://172.28.28.103         # AfghanPay Internal API IP
 MY_IP_ADDRESS=your_whitelisted_ip     # Provided during VPN setup
 
 
@@ -40,7 +40,7 @@ require("dotenv").config();
 
 (async () => {
   try {
-    console.log("ENV Recharge:", process.env.API_KEY, process.env.BASE_URL, process.env.MY_IP_ADDRESS);
+    console.log("ENV Recharge:", process.env.API_KEY, process.env.AFP_BASE_URL, process.env.MY_IP_ADDRESS);
 
     const result = await rechargeFunction.recharge("0730720001", 10);
     console.log("Recharge response:", result);
@@ -57,7 +57,7 @@ require("dotenv").config();
 
 (async () => {
   try {
-    console.log("ENV Balance:", process.env.API_KEY, process.env.BASE_URL, process.env.MY_IP_ADDRESS);
+    console.log("ENV Balance:", process.env.API_KEY, process.env.AFP_BASE_URL, process.env.MY_IP_ADDRESS);
 
     const balance = await rechargeFunction.checkBalance();
     console.log("Balance:", balance);

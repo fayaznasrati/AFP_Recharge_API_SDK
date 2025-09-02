@@ -3,7 +3,7 @@ const RechargeSDK = require("afp-recharge-api-sdk");
 
 (async () => {
   try {
-    console.log("ENV Balance:", process.env.API_KEY, process.env.BASE_URL, process.env.MY_IP_ADDRESS);
+    console.log("ENV Balance:", process.env.API_KEY, process.env.AFP_BASE_URL, process.env.MY_IP_ADDRESS);
 
     const balance = await RechargeSDK.checkBalance();
     console.log("Balance:", balance);

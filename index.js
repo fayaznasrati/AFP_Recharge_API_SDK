@@ -1,9 +1,13 @@
 const crypto = require("crypto");
 const axios = require("axios");
 require("dotenv").config();
+const DEFAULT_IP = process.env.MY_IP_ADDRESS || null;
+
 
 const RechargeSDK = {
-  generateSignature(payload) {
+
+
+  async generateSignature(payload) {
     const timestamp = Math.floor(Date.now() / 1000);
     const dataToSign = timestamp + JSON.stringify(payload);
     const signature = crypto
@@ -14,7 +18,7 @@ const RechargeSDK = {
     return { signature, timestamp };
   },
 
-  async recharge(mobile, amount, ip = process.env.MY_IP_ADDRESS) {
+  async recharge(mobile, amount, ip = DEFAULT_IP) {
     const payload = { mobile, amount };
     const { signature, timestamp } = this.generateSignature(payload);
 
@@ -25,7 +29,7 @@ const RechargeSDK = {
       "x-forwarded-for": ip,
     };
 
-    const url = `${process.env.BASE_URL}/api/v1/company/recharge`;
+    const url = `${process.env.AFP_BASE_URL}/api/v1/company/recharge`;
 
     try {
       const response = await axios.post(url, payload, { headers });
@@ -37,13 +41,33 @@ const RechargeSDK = {
     }
   },
 
-  async checkBalance(ip = process.env.MY_IP_ADDRESS) {
+  async rechargeStatus(mobile, amount, trans_number) {
+    const payload = { mobile, amount, trans_number};
+
+    const headers = {
+      "X-Api-Key": process.env.API_KEY,
+      "x-forwarded-for": ip = DEFAULT_IP,
+    };
+
+    const url = `${process.env.AFP_BASE_URL}/api/v1/company/recharge-status`;
+
+    try {
+      const response = await axios.post(url, payload, { headers });
+      return response.data;
+    } catch (err) {
+      throw new Error(
+        `Recharge status: ${err.response?.data?.message || err.message}`
+      );
+    }
+  },
+
+  async checkBalance(ip = DEFAULT_IP) {
     const headers = {
       "X-Api-Key": process.env.API_KEY,
       "x-forwarded-for": ip,
     };
 
-    const url = `${process.env.BASE_URL}/api/v1/company/check-balance`;
+    const url = `${process.env.AFP_BASE_URL}/api/v1/company/check-balance`;
 
     try {
       const response = await axios.get(url, { headers });
