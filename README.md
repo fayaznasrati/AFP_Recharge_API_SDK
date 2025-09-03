@@ -42,7 +42,7 @@ require("dotenv").config();
   try {
     console.log("ENV Recharge:", process.env.API_KEY, process.env.AFP_BASE_URL, process.env.MY_IP_ADDRESS);
 
-    const result = await rechargeFunction.recharge("0730720001", 10);
+    const result = await rechargeFunction.recharge("0730720001", 10,"150625131451259" );
     console.log("Recharge response:", result);
   } catch (err) {
     console.error("Error:", err.message);

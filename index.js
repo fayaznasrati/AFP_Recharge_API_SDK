@@ -7,7 +7,7 @@ const DEFAULT_IP = process.env.MY_IP_ADDRESS || null;
 const RechargeSDK = {
 
 
-  async generateSignature(payload) {
+  generateSignature(payload) {
     const timestamp = Math.floor(Date.now() / 1000);
     const dataToSign = timestamp + JSON.stringify(payload);
     const signature = crypto
@@ -18,8 +18,8 @@ const RechargeSDK = {
     return { signature, timestamp };
   },
 
-  async recharge(mobile, amount, ip = DEFAULT_IP) {
-    const payload = { mobile, amount };
+  async recharge(mobile, amount, transaction_id ,ip = DEFAULT_IP) {
+    const payload = { mobile, amount , transaction_id };
     const { signature, timestamp } = this.generateSignature(payload);
 
     const headers = {
@@ -41,16 +41,13 @@ const RechargeSDK = {
     }
   },
 
-  async rechargeStatus(mobile, amount, trans_number) {
-    const payload = { mobile, amount, trans_number};
-
+  async rechargeStatus(mobile, amount, transaction_id) {
+    const payload = { mobile, amount, transaction_id};
     const headers = {
       "X-Api-Key": process.env.API_KEY,
       "x-forwarded-for": ip = DEFAULT_IP,
     };
-
     const url = `${process.env.AFP_BASE_URL}/api/v1/company/recharge-status`;
-
     try {
       const response = await axios.post(url, payload, { headers });
       return response.data;
